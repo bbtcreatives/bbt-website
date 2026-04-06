@@ -155,7 +155,6 @@ export default function BBT() {
       {/* Grid lines */}
       <div style={{ position: "absolute", inset: 0, opacity: 0.03, backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
       <div style={{ position: "relative", zIndex: 2, textAlign: "center", maxWidth: 900 }}>
-        <div style={{ animation: "slideUp 0.7s ease both", marginBottom: 24 }}><LogoImg h={60} white /></div>
         <p style={{ fontFamily: F.heading, fontSize: 13, color: C.orange, letterSpacing: 4, textTransform: "uppercase", fontWeight: 500, marginBottom: 20, animation: "slideUp 0.7s ease 0.1s both" }}>BeyondBound Technologies</p>
         <h1 style={{ fontFamily: F.display, fontSize: "clamp(42px,8vw,100px)", color: "#fff", lineHeight: 0.95, fontWeight: 400, margin: "0 0 28px", textTransform: "uppercase", letterSpacing: 4, animation: "slideUp 0.7s ease 0.2s both" }}>
           Innovating The Future Of <span style={{ color: C.orange, display: "inline" }}>3D Technology</span> & Immersive Experiences
