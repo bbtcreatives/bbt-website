@@ -320,7 +320,7 @@ export default function BBT() {
         </div>
         <div>
           <h4 style={{ fontFamily: F.display, fontSize: 18, color: "rgba(255,255,255,0.6)", letterSpacing: 3, textTransform: "uppercase", marginBottom: 16 }}>Contact</h4>
-          <p style={{ fontFamily: F.body, fontSize: 13, lineHeight: 2 }}>work@beyondbound.tech<br/>+91 9910 8779 05<br/>+91 7982 353389<br/><span style={{ color: C.orange }}>www.beyondbound.tech</span></p>
+          <p style={{ fontFamily: F.body, fontSize: 13, lineHeight: 2 }}>work@beyondbound.tech<br/>+91 9990864446<br/>+91 7982 353389<br/><span style={{ color: C.orange }}>www.beyondbound.tech</span></p>
         </div>
       </div>
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)", marginTop: 48, paddingTop: 20, textAlign: "center", fontFamily: F.body, fontSize: 11, color: "rgba(255,255,255,0.2)" }}>
@@ -522,7 +522,7 @@ export default function BBT() {
           <div>
             <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 12, padding: 36, marginBottom: 20, border: "1px solid rgba(255,255,255,0.06)" }}>
               <h3 style={{ fontFamily: F.display, fontSize: 28, textTransform: "uppercase", letterSpacing: 3, marginBottom: 24 }}>Direct Contact</h3>
-              {[{l:"Email",v:"work@beyondbound.tech"},{l:"Phone",v:"+91 9910 8779 05"},{l:"Phone",v:"+91 7982 353389"},{l:"Web",v:"www.beyondbound.tech"},{l:"Web",v:"www.bbt.group"}].map((c,i) => (
+              {[{l:"Email",v:"work@beyondbound.tech"},{l:"Phone",v:"+91 9990864446"},{l:"Phone",v:"+91 7982 353389"},{l:"Web",v:"www.beyondbound.tech"},{l:"Web",v:"www.bbt.group"}].map((c,i) => (
                 <div key={i} style={{ padding: "12px 0", borderBottom: i<4?"1px solid rgba(255,255,255,0.05)":"none" }}>
                   <p style={{ fontFamily: F.heading, fontSize: 11, color: "rgba(255,255,255,0.3)", letterSpacing: 2, textTransform: "uppercase" }}>{c.l}</p>
                   <p style={{ fontFamily: F.body, fontSize: 14, color: "#fff", fontWeight: 500 }}>{c.v}</p>
