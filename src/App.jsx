@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import LOGO from "./assets/bbt-sym.png";
+
+const LOGO = "/logo.png";
 
 
 function useInView(threshold = 0.12) {
