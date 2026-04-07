@@ -76,7 +76,6 @@ export default function BBT() {
   const [page, setPage] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState(null);
   const [serviceDetail, setServiceDetail] = useState(null);
   const [caseDetail, setCaseDetail] = useState(null);
   const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", service: "", budget: "", desc: "" });
@@ -129,8 +128,7 @@ export default function BBT() {
         </button>
         <div className="dsk-nav" style={{ display: "flex", alignItems: "center", gap: 32 }}>
           {["Home","About","Services","Portfolio","Contact"].map(l => (
-            <button key={l} onClick={() => go(l.toLowerCase())} style={{ background: "none", border: "none", cursor: "none", padding: "6px 0", fontFamily: F.heading, fontSize: 13, fontWeight: 500, letterSpacing: 0.8, color: page === l.toLowerCase() ? C.orange : "rgba(255,255,255,0.6)", transition: "all 0.3s" }}
-              onMouseEnter={e => e.target.style.color = C.orange} onMouseLeave={e => e.target.style.color = page === l.toLowerCase() ? C.orange : "rgba(255,255,255,0.6)"}
+            <button key={l} onClick={() => go(l.toLowerCase())} className="nav-link" style={{ background: "none", border: "none", cursor: "none", padding: "6px 0", fontFamily: F.heading, fontSize: 13, fontWeight: 500, letterSpacing: 0.8, color: page === l.toLowerCase() ? C.orange : "rgba(255,255,255,0.6)", transition: "color 0.3s" }}
             >{l}</button>
           ))}
           <button onClick={() => go("contact")} style={{ background: C.orange, color: "#fff", border: "none", padding: "10px 26px", borderRadius: 6, fontFamily: F.heading, fontSize: 13, fontWeight: 600, cursor: "none", transition: "opacity 0.3s" }}>Get a Quote</button>
@@ -164,9 +162,7 @@ export default function BBT() {
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", animation: "slideUp 0.7s ease 0.4s both" }}>
           <button onClick={() => go("portfolio")} data-hover style={{ background: C.orange, color: "#fff", border: "none", padding: "14px 36px", borderRadius: 6, fontFamily: F.heading, fontSize: 14, fontWeight: 600, cursor: "none", letterSpacing: 0.5 }}>Explore Our Work</button>
-          <button onClick={() => go("contact")} data-hover style={{ background: "transparent", color: "#fff", border: "1px solid rgba(255,255,255,0.25)", padding: "14px 36px", borderRadius: 6, fontFamily: F.heading, fontSize: 14, fontWeight: 500, cursor: "none", transition: "all 0.3s", letterSpacing: 0.5 }}
-            onMouseEnter={e => { e.target.style.borderColor="#fff"; e.target.style.background="rgba(255,255,255,0.05)"; }}
-            onMouseLeave={e => { e.target.style.borderColor="rgba(255,255,255,0.25)"; e.target.style.background="transparent"; }}
+          <button onClick={() => go("contact")} data-hover className="hero-outline-btn" style={{ background: "transparent", color: "#fff", border: "1px solid rgba(255,255,255,0.25)", padding: "14px 36px", borderRadius: 6, fontFamily: F.heading, fontSize: 14, fontWeight: 500, cursor: "none", transition: "border-color 0.3s, background 0.3s", letterSpacing: 0.5 }}
           >Get in Touch</button>
         </div>
       </div>
@@ -198,12 +194,12 @@ export default function BBT() {
   const PillarCard = ({ s, i }) => (
     <Reveal delay={i*0.1}>
       <div data-hover onClick={() => { setActiveTab(i); go("services"); }}
-        onMouseEnter={() => setHoveredCard(i)} onMouseLeave={() => setHoveredCard(null)}
-        style={{ background: hoveredCard===i?"rgba(255,255,255,0.08)":"rgba(255,255,255,0.03)", border: `1px solid ${hoveredCard===i?"rgba(245,135,62,0.3)":"rgba(255,255,255,0.06)"}`, borderRadius: 12, padding: "40px 32px", cursor: "none", transition: "all 0.4s ease", transform: hoveredCard===i?"translateY(-6px)":"none" }}>
+        className="pillar-card"
+        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "40px 32px", cursor: "none", transition: "background 0.4s ease, border-color 0.4s ease, transform 0.4s ease", transform: "translateY(0)" }}>
         <h3 style={{ fontFamily: F.display, fontSize: 36, color: "#fff", letterSpacing: 3, textTransform: "uppercase", marginBottom: 16 }}>{s.pillar}</h3>
         <p style={{ fontFamily: F.body, fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.75, marginBottom: 28 }}>{s.desc}</p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-          {s.subs.map((sub,j) => <span key={j} style={{ fontFamily: F.body, fontSize: 11, color: "rgba(255,255,255,0.4)", padding: "4px 12px", borderRadius: 4, border: "1px solid rgba(255,255,255,0.07)", transition: "all 0.3s", ...(hoveredCard===i?{borderColor:"rgba(245,135,62,0.2)",color:"rgba(255,255,255,0.6)"}:{}) }}>{sub}</span>)}
+          {s.subs.map((sub,j) => <span key={j} className="pillar-sub" style={{ fontFamily: F.body, fontSize: 11, color: "rgba(255,255,255,0.4)", padding: "4px 12px", borderRadius: 4, border: "1px solid rgba(255,255,255,0.07)", transition: "border-color 0.3s, color 0.3s" }}>{sub}</span>)}
         </div>
       </div>
     </Reveal>
@@ -226,9 +222,7 @@ export default function BBT() {
   // ═══════════ CASE CARD ═══════════
   const CaseCard = ({ cs, i }) => (
     <Reveal delay={i*0.08}>
-      <div data-hover onClick={() => openCase(cs)} style={{ borderRadius: 12, overflow: "hidden", cursor: "none", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)", transition: "all 0.4s ease" }}
-        onMouseEnter={e => { e.currentTarget.style.transform="translateY(-5px)"; e.currentTarget.style.boxShadow="0 20px 50px rgba(0,0,0,0.3)"; e.currentTarget.style.borderColor="rgba(245,135,62,0.2)"; }}
-        onMouseLeave={e => { e.currentTarget.style.transform=""; e.currentTarget.style.boxShadow=""; e.currentTarget.style.borderColor="rgba(255,255,255,0.06)"; }}>
+      <div data-hover onClick={() => openCase(cs)} className="case-card" style={{ borderRadius: 12, overflow: "hidden", cursor: "none", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)", transition: "transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease", transform: "translateY(0)" }}>
         <div style={{ height: 200, background: `linear-gradient(135deg,${cs.color}dd,${cs.color}88)`, padding: 28, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
             <span style={{ fontFamily: F.display, fontSize: 64, color: "rgba(255,255,255,0.06)", letterSpacing: 2 }}>{cs.id}</span>
@@ -281,8 +275,7 @@ export default function BBT() {
     <div style={{ padding: "56px 0", overflow: "hidden", background: C.dark }}>
       <p style={{ textAlign: "center", fontFamily: F.heading, fontSize: 11, color: C.orange, letterSpacing: 4, textTransform: "uppercase", marginBottom: 28, fontWeight: 500 }}>Trusted By</p>
       <div style={{ display: "flex", animation: "marquee 40s linear infinite", width: "max-content" }}>
-        {[...CLIENTS,...CLIENTS].map((c,i) => <span key={i} style={{ padding: "0 40px", fontFamily: F.display, fontSize: 22, color: "rgba(255,255,255,0.12)", letterSpacing: 3, textTransform: "uppercase", whiteSpace: "nowrap", transition: "color 0.3s" }}
-          onMouseEnter={e => e.target.style.color = "rgba(255,255,255,0.5)"} onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.12)"}>{c}</span>)}
+        {[...CLIENTS,...CLIENTS].map((c,i) => <span key={i} className="marquee-item" style={{ padding: "0 40px", fontFamily: F.display, fontSize: 22, color: "rgba(255,255,255,0.12)", letterSpacing: 3, textTransform: "uppercase", whiteSpace: "nowrap", transition: "color 0.3s" }}>{c}</span>)}
       </div>
     </div>
   );
@@ -311,8 +304,7 @@ export default function BBT() {
         </div>
         <div>
           <h4 style={{ fontFamily: F.display, fontSize: 18, color: "rgba(255,255,255,0.6)", letterSpacing: 3, textTransform: "uppercase", marginBottom: 16 }}>Links</h4>
-          {["Home","About","Services","Portfolio","Contact"].map(l => <button key={l} onClick={() => go(l.toLowerCase())} style={{ display: "block", background: "none", border: "none", color: "rgba(255,255,255,0.35)", fontFamily: F.body, fontSize: 13, padding: "4px 0", cursor: "none", transition: "color 0.3s" }}
-            onMouseEnter={e => e.target.style.color=C.orange} onMouseLeave={e => e.target.style.color="rgba(255,255,255,0.35)"}>{l}</button>)}
+          {["Home","About","Services","Portfolio","Contact"].map(l => <button key={l} onClick={() => go(l.toLowerCase())} className="footer-link" style={{ display: "block", background: "none", border: "none", color: "rgba(255,255,255,0.35)", fontFamily: F.body, fontSize: 13, padding: "4px 0", cursor: "none", transition: "color 0.3s" }}>{l}</button>)}
         </div>
         <div>
           <h4 style={{ fontFamily: F.display, fontSize: 18, color: "rgba(255,255,255,0.6)", letterSpacing: 3, textTransform: "uppercase", marginBottom: 16 }}>Services</h4>
@@ -351,9 +343,7 @@ export default function BBT() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))", gap: 20 }}>
           {[{t:"Innovation",d:"Pushing boundaries with 3D and immersive technology."},{t:"Immersion",d:"Captivating all senses to create lasting memories."},{t:"Impact",d:"Measured by real results — engagement, sales, transformation."}].map((v,i) => (
             <Reveal key={i} delay={i*0.1}>
-              <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 12, padding: 36, textAlign: "center", transition: "all 0.3s", border: "1px solid rgba(255,255,255,0.06)" }}
-                onMouseEnter={e => { e.currentTarget.style.transform="translateY(-4px)"; e.currentTarget.style.borderColor="rgba(245,135,62,0.2)"; }}
-                onMouseLeave={e => { e.currentTarget.style.transform=""; e.currentTarget.style.borderColor="rgba(255,255,255,0.06)"; }}>
+              <div className="values-card" style={{ background: "rgba(255,255,255,0.03)", borderRadius: 12, padding: 36, textAlign: "center", transition: "transform 0.3s, border-color 0.3s", border: "1px solid rgba(255,255,255,0.06)", transform: "translateY(0)" }}>
                 <h3 style={{ fontFamily: F.display, fontSize: 30, color: C.orange, textTransform: "uppercase", letterSpacing: 3, marginBottom: 14 }}>{v.t}</h3>
                 <p style={{ fontFamily: F.body, fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>{v.d}</p>
               </div>
@@ -376,9 +366,7 @@ export default function BBT() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 14 }}>
           {SERVICES[activeTab].subs.map((sub,j) => (
             <Reveal key={sub} delay={j*0.05}>
-              <div data-hover onClick={() => SERVICE_INFO[sub] && setServiceDetail(sub)} style={{ background: "rgba(255,255,255,0.03)", borderRadius: 10, padding: 24, cursor: SERVICE_INFO[sub]?"none":"default", transition: "all 0.3s", border: "1px solid rgba(255,255,255,0.06)" }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor=C.orange; e.currentTarget.style.transform="translateY(-2px)"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor="rgba(255,255,255,0.06)"; e.currentTarget.style.transform=""; }}>
+              <div data-hover onClick={() => SERVICE_INFO[sub] && setServiceDetail(sub)} className="service-sub-card" style={{ background: "rgba(255,255,255,0.03)", borderRadius: 10, padding: 24, cursor: SERVICE_INFO[sub]?"none":"default", transition: "transform 0.3s, border-color 0.3s", border: "1px solid rgba(255,255,255,0.06)", transform: "translateY(0)" }}>
                 <p style={{ fontFamily: F.heading, fontSize: 15, color: "#fff", fontWeight: 600 }}>{sub}</p>
                 {SERVICE_INFO[sub] && <p style={{ fontFamily: F.body, fontSize: 12, color: C.orange, marginTop: 8, fontWeight: 500 }}>View Details →</p>}
               </div>
@@ -417,9 +405,7 @@ export default function BBT() {
           <h3 style={{ fontFamily: F.display, fontSize: 36, color: "#fff", textTransform: "uppercase", letterSpacing: 3, marginBottom: 32 }}>Technology Stack</h3>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center" }}>
             {["Unity","Unreal Engine","WebXR","ARKit","ARCore","Three.js","React Three Fiber","GSAP","Next.js","Blender"].map(t => (
-              <span key={t} data-hover style={{ background: "rgba(255,255,255,0.04)", padding: "10px 22px", borderRadius: 6, fontFamily: F.heading, fontSize: 13, color: "rgba(255,255,255,0.5)", fontWeight: 500, border: "1px solid rgba(255,255,255,0.06)", transition: "all 0.3s", cursor: "none" }}
-                onMouseEnter={e => { e.target.style.background=C.orange; e.target.style.color="#fff"; e.target.style.borderColor=C.orange; }}
-                onMouseLeave={e => { e.target.style.background="rgba(255,255,255,0.04)"; e.target.style.color="rgba(255,255,255,0.5)"; e.target.style.borderColor="rgba(255,255,255,0.06)"; }}>{t}</span>))}
+              <span key={t} data-hover className="tech-tag" style={{ background: "rgba(255,255,255,0.04)", padding: "10px 22px", borderRadius: 6, fontFamily: F.heading, fontSize: 13, color: "rgba(255,255,255,0.5)", fontWeight: 500, border: "1px solid rgba(255,255,255,0.06)", transition: "background 0.3s, color 0.3s, border-color 0.3s", cursor: "none" }}>{t}</span>))}
           </div>
         </Reveal>
       </div>
@@ -531,8 +517,7 @@ export default function BBT() {
             <div style={{ background: `linear-gradient(135deg,${C.blue}88,${C.blue}44)`, borderRadius: 12, padding: 32, border: "1px solid rgba(255,255,255,0.06)" }}>
               <h3 style={{ fontFamily: F.display, fontSize: 22, letterSpacing: 3, textTransform: "uppercase", marginBottom: 16 }}>Follow Us</h3>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                {["LinkedIn","Instagram","YouTube","Behance"].map(s => <span key={s} data-hover style={{ background: "rgba(255,255,255,0.08)", padding: "8px 16px", borderRadius: 6, fontFamily: F.body, fontSize: 12, fontWeight: 500, cursor: "none", transition: "background 0.3s" }}
-                  onMouseEnter={e => e.target.style.background="rgba(255,255,255,0.16)"} onMouseLeave={e => e.target.style.background="rgba(255,255,255,0.08)"}>{s}</span>)}
+                {["LinkedIn","Instagram","YouTube","Behance"].map(s => <span key={s} data-hover className="social-link" style={{ background: "rgba(255,255,255,0.08)", padding: "8px 16px", borderRadius: 6, fontFamily: F.body, fontSize: 12, fontWeight: 500, cursor: "none", transition: "background 0.3s" }}>{s}</span>)}
               </div>
             </div>
           </div>
@@ -571,6 +556,17 @@ export default function BBT() {
         @media(max-width:768px){.dsk-nav{display:none!important}.mob-btn{display:flex!important}}
         @media(min-width:769px){.mob-btn{display:none!important}}
         @media(pointer:coarse){*{cursor:auto!important}.c-ring,.c-dot{display:none!important}}
+        .nav-link:hover{color:${C.orange}!important}
+        .footer-link:hover{color:${C.orange}!important}
+        .hero-outline-btn:hover{border-color:#fff!important;background:rgba(255,255,255,0.05)!important}
+        .marquee-item:hover{color:rgba(255,255,255,0.5)!important}
+        .pillar-card:hover{background:rgba(255,255,255,0.08)!important;border-color:rgba(245,135,62,0.3)!important;transform:translateY(-6px)!important}
+        .pillar-card:hover .pillar-sub{border-color:rgba(245,135,62,0.2)!important;color:rgba(255,255,255,0.6)!important}
+        .case-card:hover{transform:translateY(-5px)!important;box-shadow:0 20px 50px rgba(0,0,0,0.3)!important;border-color:rgba(245,135,62,0.2)!important}
+        .values-card:hover{transform:translateY(-4px)!important;border-color:rgba(245,135,62,0.2)!important}
+        .service-sub-card:hover{transform:translateY(-2px)!important;border-color:${C.orange}!important}
+        .tech-tag:hover{background:${C.orange}!important;color:#fff!important;border-color:${C.orange}!important}
+        .social-link:hover{background:rgba(255,255,255,0.16)!important}
       `}</style>
       <div ref={ringRef} className="c-ring" style={{ position:"fixed",top:0,left:0,width:cSize,height:cSize,borderRadius:"50%",pointerEvents:"none",zIndex:9999,border:cursorType==="link"?`1.5px solid ${C.orange}`:"1.5px solid rgba(255,255,255,0.2)",background:cursorType==="link"?"rgba(245,135,62,0.06)":"transparent",transition:"width 0.25s,height 0.25s,border 0.25s,background 0.25s" }}/>
       <div ref={dotRef} className="c-dot" style={{ position:"fixed",top:0,left:0,width:6,height:6,borderRadius:"50%",pointerEvents:"none",zIndex:10000,background:cursorType==="link"?C.orange:"#fff",transition:"background 0.2s" }}/>
